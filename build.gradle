@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'me.diademiemi'
@@ -23,6 +24,24 @@ repositories {
 dependencies {
     compileOnly "org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT"
     compileOnly "org.geysermc.geyser:api:2.2.0-SNAPSHOT"
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/diademiemi/InvUILib")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        register("jar", MavenPublication) {
+            from(components["java"])
+        }
+    }
 }
 
 def targetJavaVersion = 8
