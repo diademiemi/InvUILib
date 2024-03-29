@@ -1,5 +1,9 @@
 package me.diademiemi.invuilib.menu;
 
+/**
+ * Enum for the size of the GUI
+ * Only THREE_ROWS and SIX_ROWS are stable on Bedrock Edition
+ */
 public enum MenuSize {
     HALF_ROW(5),
     ONE_ROW(9),

@@ -12,16 +12,16 @@ public class MenuListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        ActiveMenu gui = ActiveMenu.getActiveMenu(player);
-        if (gui != null) {
-            if (e.getClickedInventory() == gui.getInventory()) e.setCancelled(true);
-            if (gui.getButton(e.getRawSlot()) != null) {
+        Menu menu = Menu.getMenu(player);
+        if (menu != null) {
+            if (e.getClickedInventory() == menu.getInventory()) e.setCancelled(true);
+            if (menu.getButton(e.getRawSlot()) != null) {
                 if (e.getCursor().getType() != Material.AIR) {
-                    gui.getButton(e.getRawSlot()).onItemDrag(player, e.getCursor());
+                    menu.getButton(e.getRawSlot()).onItemDrag(player, e.getCursor());
                 } else if (e.isLeftClick()) {
-                    gui.getButton(e.getRawSlot()).onLeftClick(player);
+                    menu.getButton(e.getRawSlot()).onLeftClick(player);
                 } else if (e.isRightClick()) {
-                    gui.getButton(e.getRawSlot()).onRightClick(player);
+                    menu.getButton(e.getRawSlot()).onRightClick(player);
                 }
             }
         }
@@ -29,17 +29,22 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
-        ActiveMenu gui = ActiveMenu.getActiveMenu((Player) e.getPlayer());
-        if (gui != null) {
-            gui.close();
+        Menu menu = Menu.getMenu((Player) e.getPlayer());
+
+        if (menu != null) {
+            if (menu.preventClose) {
+                menu.open();
+            } else {
+                menu.close();
+            }
         }
     }
 
     @EventHandler
     public void onPlayerQUit(PlayerQuitEvent e) {
-        ActiveMenu gui = ActiveMenu.getActiveMenu(e.getPlayer());
-        if (gui != null) {
-            gui.close();
+        Menu menu = Menu.getMenu(e.getPlayer());
+        if (menu != null) {
+            menu.close();
         }
     }
 }

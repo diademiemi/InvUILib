@@ -1,9 +1,11 @@
 package me.diademiemi.invuilib.input;
 
 import me.diademiemi.invuilib.InvUILib;
+import me.diademiemi.invuilib.menu.Menu;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class ChatListener implements Listener {
     @EventHandler
@@ -14,5 +16,11 @@ public class ChatListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    @EventHandler
+    public void onPlayerQUit(PlayerQuitEvent e) {
+        ChatTextInput input = ChatTextInput.getInputs().get(e.getPlayer());
+        if (input != null) {
+            input.remove();
+        }
+    }
 }
