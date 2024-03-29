@@ -30,7 +30,7 @@ publishing {
     repositories {
         maven {
             name = "GitHub"
-            url = uri("https://maven.pkg.github.com/diademiemi/InvUILib")
+            url = uri("https://maven.pkg.github.com/diademiemi/invuilib")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
