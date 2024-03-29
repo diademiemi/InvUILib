@@ -1,0 +1,9 @@
+name: InvUILib
+version: '${version}'
+main: me.diademiemi.invuilib.InvUILib
+api-version: '1.13'
+commands:
+  invuilib:
+      description: Open the InvUILib
+      usage: /<command>
+      aliases: [invui, inv]
