@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,20 +22,37 @@ public class Menu {
     public Inventory inventory;
     public Player player;
     public String title;
-    public boolean preventClose = false;
+    private Runnable onOpen;
+    private Runnable onClose;
+    private Runnable onForceClose;
 
     /**
-     * @param activeMenu GUI to add
+     * Create menu
+     *
+     * @param size         the size of the GUI
+     * @param title        the title of the GUI
+     * @param player       the Player for the GUI
+     * @param buttons      the buttons of the GUI
+     * @param onOpen       the action to run when the GUI is opened (by plugin)
+     * @param onClose      the action to run when the GUI is closed (by plugin)
+     * @param onForceClose the action to run when the GUI is force closed (by player)
      */
-    public void addMenu(Menu activeMenu) {
-        menuMap.put(player, activeMenu);
-    }
+    public Menu(Player player, MenuSize size, String title, HashMap<Integer, MenuButton> buttons, Runnable onOpen, Runnable onClose, Runnable onForceClose) {
+        this.title = title;
+        this.player = player;
+        this.buttons = buttons;
+        this.onOpen = onOpen;
+        this.onClose = onClose;
+        this.onForceClose = onForceClose;
 
-    /**
-     * @param activeMenu GUI to remove
-     */
-    public void removeMenu(Menu activeMenu) {
-        menuMap.remove(player, activeMenu);
+        if (size == MenuSize.HALF_ROW) {
+            this.inventory = Bukkit.getServer().createInventory(null, InventoryType.HOPPER, title);
+        } else {
+            this.inventory = Bukkit.getServer().createInventory(null, size.getSize(), title);
+        }
+
+        this.bakeButtons();
+        menuMap.put(player, this);
     }
 
     /**
@@ -55,42 +71,48 @@ public class Menu {
     }
 
     /**
-     * Create menu
-     * @param size the size of the GUI
-     * @param title the title of the GUI
-     * @param player the Player for the GUI
-     * @param buttons the buttons of the GUI
+     * @param activeMenu GUI to add
      */
-    public Menu(Player player, MenuSize size, String title, HashMap<Integer, MenuButton> buttons, boolean preventClose) {
-        this.title = title;
-        this.player = player;
-        this.buttons = buttons;
-        this.preventClose = preventClose;
+    public void addMenu(Menu activeMenu) {
+        menuMap.put(player, activeMenu);
+    }
 
-        if (size == MenuSize.HALF_ROW) {
-            this.inventory = Bukkit.getServer().createInventory(null, InventoryType.HOPPER, title);
-        } else {
-            this.inventory = Bukkit.getServer().createInventory(null, size.getSize(), title);
-        }
-
-        this.bakeButtons();
-        menuMap.put(player, this);
+    /**
+     * @param activeMenu GUI to remove
+     */
+    public void removeMenu(Menu activeMenu) {
+        menuMap.remove(player, activeMenu);
     }
 
     /**
      * Open the GUI for the player
+     * Happens when the plugin calls the open method
      */
     public void open() {
         player.openInventory(inventory);
+        onOpen();
     }
 
     /**
      * Close the GUI and remove it from the GUI map
+     * Happens when the plugin calls the close method
      */
     public void close() {
         removeMenu(this);
         player.closeInventory();
+        onClose();
     }
+
+    /**
+     * Close the GUI and remove it from the GUI map
+     * Happens when the player closes the GUI with escape or by logging out
+     */
+    public void forceClose() {
+        removeMenu(this);
+        player.closeInventory();
+        onForceClose();
+    }
+
 
     /**
      * @param slot the slot to get the button of
@@ -101,7 +123,7 @@ public class Menu {
     }
 
     /**
-     * @param slot the slot to update the button of
+     * @param slot   the slot to update the button of
      * @param button the button to update
      * @throws IndexOutOfBoundsException if the slot is out of bounds
      */
@@ -115,7 +137,7 @@ public class Menu {
 
     /**
      * @param button the button to add
-     * @param slot the slots to add the button to
+     * @param slot   the slots to add the button to
      * @throws IndexOutOfBoundsException if the slot is out of bounds
      */
     public void addButton(MenuButton button, int... slot) throws IndexOutOfBoundsException {
@@ -145,24 +167,53 @@ public class Menu {
     }
 
     /**
-     * @param preventClose whether to prevent the GUI from closing
-     */
-    public void setPreventClose(boolean preventClose) {
-        this.preventClose = preventClose;
-    }
-
-    /**
-     * @return whether the GUI is set to prevent closing
-     */
-    public boolean isPreventClose() {
-        return preventClose;
-    }
-
-    /**
      * @return the inventory of the GUI
      */
     public Inventory getInventory() {
         return inventory;
     }
 
+    public void onOpen() {
+        onOpen.run();
+    }
+
+    public void onClose() {
+        onClose.run();
+    }
+
+    public void onForceClose() {
+        onForceClose.run();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Runnable getOnOpen() {
+        return onOpen;
+    }
+
+    public void setOnOpen(Runnable onOpen) {
+        this.onOpen = onOpen;
+    }
+
+    public Runnable getOnClose() {
+        return onClose;
+    }
+
+    public void setOnClose(Runnable onClose) {
+        this.onClose = onClose;
+    }
+
+    public Runnable getOnForceClose() {
+        return onForceClose;
+    }
+
+    public void setOnForceClose(Runnable onForceClose) {
+        this.onForceClose = onForceClose;
+    }
 }

@@ -30,21 +30,16 @@ public class MenuListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         Menu menu = Menu.getMenu((Player) e.getPlayer());
-
         if (menu != null) {
-            if (menu.preventClose) {
-                menu.open();
-            } else {
-                menu.close();
-            }
+            menu.forceClose();
         }
     }
 
     @EventHandler
-    public void onPlayerQUit(PlayerQuitEvent e) {
+    public void onPlayerQuit(PlayerQuitEvent e) {
         Menu menu = Menu.getMenu(e.getPlayer());
         if (menu != null) {
-            menu.close();
+            menu.forceClose();
         }
     }
 }

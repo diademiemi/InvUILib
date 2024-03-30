@@ -12,7 +12,9 @@ public class MenuBuilder {
     public Player player;
 
     public HashMap<Integer, MenuButton> buttons;
-    private boolean preventClose;
+    private Runnable onOpen = () -> {};
+    private Runnable onClose = () -> {};
+    private Runnable onForceClose = () -> {};
 
     public MenuBuilder(String title, MenuSize size, Player player) {
         this.title = title;
@@ -23,10 +25,6 @@ public class MenuBuilder {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setPreventClose(boolean preventClose) {
-        this.preventClose = preventClose;
     }
 
     public void setSize(MenuSize size) {
@@ -101,11 +99,21 @@ public class MenuBuilder {
         addButtonByColumnRow(button, column, row, false);
     }
 
+    public void setOnOpen(Runnable onOpen) {
+        this.onOpen = onOpen;
+    }
 
+    public void setOnClose(Runnable onClose) {
+        this.onClose = onClose;
+    }
+
+    public void setOnForceClose(Runnable onForceClose) {
+        this.onForceClose = onForceClose;
+    }
 
 
     public Menu build() {
-        return new Menu(player, size, title, buttons, preventClose);
+        return new Menu(player, size, title, buttons, onOpen, onClose, onForceClose);
     }
 
 }

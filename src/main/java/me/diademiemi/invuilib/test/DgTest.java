@@ -44,13 +44,24 @@ public class DgTest implements Dialog {
         }, 6, 5, true);
 
         // Center
-        builder.addButtonByColumnRow(new MenuButton(Material.PURPLE_CONCRETE, 1, "Center") {
+        builder.addButtonByColumnRow(new MenuButton(Material.BARRIER, 1, "Close") {
             @Override
             public void onLeftClick(Player p) {
-                p.sendMessage("You clicked the center button!");
+                close(p);
             }
         }, 3, 2, true);
 
+        builder.setOnOpen(() -> {
+            p.sendMessage("Test menu opened!");
+        });
+
+        builder.setOnClose(() -> {
+            p.sendMessage("Test menu closed!");
+        });
+
+        builder.setOnForceClose(() -> {
+            p.sendMessage("Test menu force closed!");
+        });
 
         return builder.build();
     }
