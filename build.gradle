@@ -12,7 +12,7 @@ version = '0.1'
 repositories {
     mavenCentral()
     maven {
-        name = "spigotmc-repo"z
+        name = "spigotmc-repo"
         url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
     maven {
