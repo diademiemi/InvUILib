@@ -17,19 +17,24 @@ InvUILib provides a simple API for creating GUIs in Minecraft. The main class in
 A helper interface `Dialog` is provided which safely opens a menu for the player, first closing any existing menu they have open.
 
 ### Adding dependencies
-To use InvUILib in your plugin, you should add the following dependency to your `build.gradle` file:
+To use InvUILib in your plugin, you should add the following dependency to your `build.gradle` or `pom.xml` file:
+
+## Gradle
 
 ```gradle
-repositories {
-    maven {
-        name = "invuilib"
-        url = uri("https://maven.pkg.github.com/diademiemi/invuilib")
-        credentials {
-            username = "$System.env.GITHUB_ACTOR"
-            password = "$System.env.GITHUB_TOKEN"
-        }
-    }
+dependencies {
+    compileOnly "me.diademiemi:invuilib:0.1"
 }
+```
+
+## Maven
+
+```xml
+<dependency>
+    <groupId>me.diademiemi</groupId>
+    <artifactId>invuilib</artifactId>
+    <version>0.1</version>
+</dependency>
 ```
 
 This will require you to set the `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables to your GitHub username and a personal access token. This is sadly a limitation of the GitHub Maven Package Registry.
