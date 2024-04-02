@@ -4,12 +4,29 @@ import net.md_5.bungee.api.ChatColor;
 
 import java.util.HashMap;
 
+/**
+ * The type Format.
+ */
 public class Format {
 
+    /**
+     * Format string.
+     *
+     * @param msg          the msg
+     * @param replacements the replacements
+     * @return the string
+     */
     public static String format(String msg, String... replacements) {
         return ChatColor.translateAlternateColorCodes('&', replace(msg, replacements));
     }
 
+    /**
+     * Replace string.
+     *
+     * @param msg          the msg
+     * @param replacements the replacements
+     * @return the string
+     */
     public static String replace(String msg, String... replacements) {
         // Create dict for replacements
         // Loop through replacements

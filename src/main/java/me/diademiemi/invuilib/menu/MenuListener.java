@@ -8,7 +8,15 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+/**
+ * The type Menu listener.
+ */
 public class MenuListener implements Listener {
+    /**
+     * On click.
+     *
+     * @param e the e
+     */
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
@@ -27,6 +35,11 @@ public class MenuListener implements Listener {
         }
     }
 
+    /**
+     * On inventory close.
+     *
+     * @param e the e
+     */
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         Menu menu = Menu.getMenu((Player) e.getPlayer());
@@ -37,6 +50,11 @@ public class MenuListener implements Listener {
         }
     }
 
+    /**
+     * On player quit.
+     *
+     * @param e the e
+     */
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
         Menu menu = Menu.getMenu(e.getPlayer());

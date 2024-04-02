@@ -5,12 +5,30 @@ import org.geysermc.api.util.UiProfile;
 import org.geysermc.geyser.api.GeyserApi;
 import org.geysermc.geyser.api.connection.GeyserConnection;
 
+/**
+ * The type Player util.
+ */
 public class PlayerUtil {
+    /**
+     * The enum Menu type.
+     */
     public enum MenuType {
+        /**
+         * Classic menu type.
+         */
         CLASSIC,
+        /**
+         * Pocket menu type.
+         */
         POCKET
     }
 
+    /**
+     * Gets menu type.
+     *
+     * @param player the player
+     * @return the menu type
+     */
     public static MenuType getMenuType(Player player) {
         GeyserConnection connection = GeyserApi.api().connectionByUuid(player.getUniqueId());
 

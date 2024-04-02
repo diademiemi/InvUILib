@@ -15,6 +15,9 @@ import org.geysermc.geyser.api.GeyserApi;
 
 import java.util.List;
 
+/**
+ * The type Command handler.
+ */
 public class CommandHandler implements CommandExecutor, TabCompleter {
 
     @Override
@@ -44,6 +47,13 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
         }
     }
 
+    /**
+     * Info command boolean.
+     *
+     * @param sender the sender
+     * @param args   the args
+     * @return the boolean
+     */
     public boolean infoCommand(CommandSender sender, String[] args) {
         if (args.length == 1) {
             sender.sendMessage("Usage: /invuilib info <player>");
@@ -75,6 +85,13 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
         }
     }
 
+    /**
+     * Test command boolean.
+     *
+     * @param sender the sender
+     * @param args   the args
+     * @return the boolean
+     */
     public boolean testCommand(CommandSender sender, String[] args) {
         if (args.length == 1) {
             sender.sendMessage("Usage: /invuilib test <player>");

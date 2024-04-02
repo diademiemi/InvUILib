@@ -4,6 +4,9 @@ import me.diademiemi.invuilib.menu.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+/**
+ * The type Dg test.
+ */
 public class DgTest implements Dialog {
 
     @Override

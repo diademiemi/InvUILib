@@ -17,10 +17,25 @@ import java.util.Map;
  * Menus can be set to prevent closing, this is useful for menus that require a player to complete an action before closing
  */
 public class Menu {
+    /**
+     * The constant menuMap.
+     */
     public static HashMap<Player, Menu> menuMap = new HashMap<Player, Menu>();
+    /**
+     * The Buttons.
+     */
     public HashMap<Integer, MenuButton> buttons;
+    /**
+     * The Inventory.
+     */
     public Inventory inventory;
+    /**
+     * The Player.
+     */
     public Player player;
+    /**
+     * The Title.
+     */
     public String title;
     private Runnable onOpen;
     private Runnable onClose;
@@ -29,9 +44,9 @@ public class Menu {
     /**
      * Create menu
      *
+     * @param player       the Player for the GUI
      * @param size         the size of the GUI
      * @param title        the title of the GUI
-     * @param player       the Player for the GUI
      * @param buttons      the buttons of the GUI
      * @param onOpen       the action to run when the GUI is opened (by plugin)
      * @param onClose      the action to run when the GUI is closed (by plugin)
@@ -56,6 +71,8 @@ public class Menu {
     }
 
     /**
+     * Gets menu map.
+     *
      * @return all loaded GUIs
      */
     public static HashMap<Player, Menu> getMenuMap() {
@@ -63,6 +80,8 @@ public class Menu {
     }
 
     /**
+     * Gets menu.
+     *
      * @param player the player to get the GUI of
      * @return the GUI of the given inventory and player
      */
@@ -71,6 +90,8 @@ public class Menu {
     }
 
     /**
+     * Add menu.
+     *
      * @param activeMenu GUI to add
      */
     public void addMenu(Menu activeMenu) {
@@ -78,6 +99,8 @@ public class Menu {
     }
 
     /**
+     * Remove menu.
+     *
      * @param activeMenu GUI to remove
      */
     public void removeMenu(Menu activeMenu) {
@@ -115,6 +138,8 @@ public class Menu {
 
 
     /**
+     * Gets button.
+     *
      * @param slot the slot to get the button of
      * @return the button of the given slot
      */
@@ -123,6 +148,8 @@ public class Menu {
     }
 
     /**
+     * Update button.
+     *
      * @param slot   the slot to update the button of
      * @param button the button to update
      * @throws IndexOutOfBoundsException if the slot is out of bounds
@@ -136,6 +163,8 @@ public class Menu {
     }
 
     /**
+     * Add button.
+     *
      * @param button the button to add
      * @param slot   the slots to add the button to
      * @throws IndexOutOfBoundsException if the slot is out of bounds
@@ -151,6 +180,8 @@ public class Menu {
     }
 
     /**
+     * Remove button.
+     *
      * @param slot the slot to remove the button from
      */
     public void removeButton(int slot) {
@@ -167,52 +198,103 @@ public class Menu {
     }
 
     /**
+     * Gets inventory.
+     *
      * @return the inventory of the GUI
      */
     public Inventory getInventory() {
         return inventory;
     }
 
+    /**
+     * On open.
+     */
     public void onOpen() {
         onOpen.run();
     }
 
+    /**
+     * On close.
+     */
     public void onClose() {
         onClose.run();
     }
 
+    /**
+     * On force close.
+     */
     public void onForceClose() {
         onForceClose.run();
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets title.
+     *
+     * @param title the title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Gets on open.
+     *
+     * @return the on open
+     */
     public Runnable getOnOpen() {
         return onOpen;
     }
 
+    /**
+     * Sets on open.
+     *
+     * @param onOpen the on open
+     */
     public void setOnOpen(Runnable onOpen) {
         this.onOpen = onOpen;
     }
 
+    /**
+     * Gets on close.
+     *
+     * @return the on close
+     */
     public Runnable getOnClose() {
         return onClose;
     }
 
+    /**
+     * Sets on close.
+     *
+     * @param onClose the on close
+     */
     public void setOnClose(Runnable onClose) {
         this.onClose = onClose;
     }
 
+    /**
+     * Gets on force close.
+     *
+     * @return the on force close
+     */
     public Runnable getOnForceClose() {
         return onForceClose;
     }
 
+    /**
+     * Sets on force close.
+     *
+     * @param onForceClose the on force close
+     */
     public void setOnForceClose(Runnable onForceClose) {
         this.onForceClose = onForceClose;
     }

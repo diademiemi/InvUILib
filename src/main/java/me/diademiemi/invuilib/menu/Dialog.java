@@ -13,6 +13,12 @@ import org.geysermc.geyser.api.connection.GeyserConnection;
  * MenuBuilder is provided to help with creating menus.
  */
 public interface Dialog {
+    /**
+     * Show.
+     *
+     * @param player the player
+     * @param args   the args
+     */
     default void show(Player player, Object... args) {
         try {
             close(player);
@@ -37,9 +43,21 @@ public interface Dialog {
         }
     }
 
+    /**
+     * Close.
+     *
+     * @param player the player
+     */
     default void close(Player player) {
         Menu.getMenu(player).close();
     }
 
+    /**
+     * Create menu.
+     *
+     * @param p    the p
+     * @param args the args
+     * @return the menu
+     */
     Menu create(Player p, Object... args);
 }

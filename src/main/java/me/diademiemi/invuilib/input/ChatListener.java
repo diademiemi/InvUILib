@@ -7,7 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+/**
+ * The type Chat listener.
+ */
 public class ChatListener implements Listener {
+    /**
+     * On chat message.
+     *
+     * @param e the e
+     */
     @EventHandler
     public void onChatMessage(AsyncPlayerChatEvent e) {
         if (ChatTextInput.getInputs().containsKey(e.getPlayer())) {
@@ -16,8 +24,14 @@ public class ChatListener implements Listener {
             e.setCancelled(true);
         }
     }
+
+    /**
+     * On player quit.
+     *
+     * @param e the e
+     */
     @EventHandler
-    public void onPlayerQUit(PlayerQuitEvent e) {
+    public void onPlayerQuit(PlayerQuitEvent e) {
         ChatTextInput input = ChatTextInput.getInputs().get(e.getPlayer());
         if (input != null) {
             input.remove();

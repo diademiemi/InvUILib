@@ -6,6 +6,9 @@ import me.diademiemi.invuilib.menu.MenuListener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * The type Inv ui lib.
+ */
 public final class InvUILib extends JavaPlugin {
 
     private static InvUILib plugin;
@@ -29,6 +32,11 @@ public final class InvUILib extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    /**
+     * Gets plugin.
+     *
+     * @return the plugin
+     */
     public static InvUILib getPlugin() {
         return plugin;
     }
