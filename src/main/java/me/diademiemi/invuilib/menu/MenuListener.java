@@ -31,7 +31,9 @@ public class MenuListener implements Listener {
     public void onInventoryClose(InventoryCloseEvent e) {
         Menu menu = Menu.getMenu((Player) e.getPlayer());
         if (menu != null) {
-            menu.forceClose();
+            if (menu.getInventory().equals(e.getInventory())) {
+                menu.forceClose();
+            }
         }
     }
 

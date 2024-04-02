@@ -1,6 +1,9 @@
 package me.diademiemi.invuilib.menu;
 
+import me.diademiemi.invuilib.InvUILib;
 import org.bukkit.entity.Player;
+import org.geysermc.geyser.api.GeyserApi;
+import org.geysermc.geyser.api.connection.GeyserConnection;
 
 /**
  * A dialog is a wrapper around a menu that is intended to be shown to a player.
@@ -19,7 +22,18 @@ public interface Dialog {
 
         Menu menu = create(player, args);
         if (menu != null) {
-            menu.open(); // Sometimes it is intended to return null
+            GeyserConnection connection = GeyserApi.api().connectionByUuid(player.getUniqueId());
+
+            if (connection == null) {
+                // We can assume this is a Java player
+                menu.open();
+            } else {
+                // We can assume this is a Bedrock player
+                // For bedrock players, add a 2 tick delay, or the UI will not update its title
+                InvUILib.getPlugin().getServer().getScheduler().runTaskLater(InvUILib.getPlugin(), menu::open, 2);
+            }
+
+//            menu.open();
         }
     }
 
