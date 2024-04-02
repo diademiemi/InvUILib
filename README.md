@@ -37,7 +37,6 @@ dependencies {
 </dependency>
 ```
 
-This will require you to set the `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables to your GitHub username and a personal access token. This is sadly a limitation of the GitHub Maven Package Registry.
 ### Creating a Menu
 To create a new `Menu`, you should implement the `Dialog` interface and override the `create` method. This method should return a new instance of the `Menu` class, with the desired title and size of the menu.
 
